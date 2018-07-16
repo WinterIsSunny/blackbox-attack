@@ -458,7 +458,7 @@ def load_model(model, filename):
 
 if __name__ == '__main__':
     train_loader, test_loader, train_dataset, test_dataset = load_mnist_data()
-    net = MNSIT()
+    net = MNIST()
     if torch.cuda.is_available():
         net.cuda()
         net = torch.nn.DataParallel(net, device_ids=[0])
