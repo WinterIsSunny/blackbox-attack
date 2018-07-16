@@ -463,10 +463,10 @@ if __name__ == '__main__':
         net.cuda()
         net = torch.nn.DataParallel(net, device_ids=[0])
         #net = torch.nn.DataParallel(net, device_ids=range(torch.cuda.device_count()))
-    train_mnist(net, train_loader)
+    #train_mnist(net, train_loader)
     #load_model(net, 'models/mnist_gpu.pt')
-    #load_model(net, 'models/mnist.pt')
-    test_mnist(net, test_loader)
+    load_model(net, 'models/mnist.pt')
+    #test_mnist(net, test_loader)
     save_model(net,'./models/mnist.pt')
     #net.eval()
 
