@@ -387,10 +387,10 @@ def attack_mnist(alpha=0.2, beta=0.001, isTarget= False, num_attacks= 100):
         print("Original label: ", label)
         print("Predicted label: ", model.predict(image))
         if target == None:
-            adversarial = attack_untargeted(model, dataset, image, label, alpha = alpha, beta = beta, iterations = 1000)
+            adversarial = attack_untargeted(model, image, label, alpha = alpha, beta = beta, iterations = 1000)
         else:
             print("Targeted attack: %d" % target)
-            adversarial = attack_targeted(model, dataset, image, label, target, alpha = alpha, beta = beta, iterations = 1000)
+            adversarial = attack_targeted(model, image, label, target, alpha = alpha, beta = beta, iterations = 1000)
         show_image(adversarial.numpy())
         print("Predicted label for adversarial example: ", model.predict(adversarial))
         return torch.norm(adversarial - image)
