@@ -411,4 +411,19 @@ def attack_mnist(alpha=0.2, beta=0.001, isTarget= False, num_attacks= 100):
     print("Average distortion on random {} images is {}".format(num_attacks, total_distortion/num_attacks))
 
 
+if __name__ == '__main__':
+    timestart = time.time()
+    random.seed(0)
+    
+    attack_mnist(alpha=2, beta=0.005, isTarget= False)
+    #attack_cifar10(alpha=5, beta=0.001, isTarget= False)
+    #attack_imagenet(arch='resnet50', alpha=10, beta=0.005, isTarget= False)
+    #attack_imagenet(arch='vgg19', alpha=0.05, beta=0.001, isTarget= False, num_attacks= 10)
 
+    #attack_mnist(alpha=2, beta=0.005, isTarget= True)
+    #attack_cifar10(alpha=5, beta=0.001, isTarget= True)
+    #attack_imagenet(arch='resnet50', alpha=10, beta=0.005, isTarget= True)
+    #attack_imagenet(arch='vgg19', alpha=0.05, beta=0.001, isTarget= True, num_attacks= 10)
+
+    timeend = time.time()
+    print("\n\nTotal running time: %.4f seconds\n" % (timeend - timestart))
