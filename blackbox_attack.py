@@ -185,7 +185,7 @@ def fine_grained_binary_search_targeted(model, x0, y0, t, theta, initial_lbd = 1
 
 
 
-def attack_untargeted(model, train_dataset, x0, y0, alpha = 0.2, beta = 0.001, iterations = 1000):
+def attack_untargeted(model, x0, y0, alpha = 0.2, beta = 0.001, iterations = 1000):
     """ Attack the original image and return adversarial example
         model: (pytorch model)
         train_dataset: set of training data
