@@ -185,12 +185,13 @@ def fine_grained_binary_search_targeted(model, x0, y0, t, theta, initial_lbd = 1
 
 
 
-def attack_untargeted(model, x0, y0, alpha = 0.2, beta = 0.001, iterations = 1000):
+def attack_untargeted(model, train_dataset, x0, y0, alpha = 0.2, beta = 0.001, iterations = 1000):
     """ Attack the original image and return adversarial example
         model: (pytorch model)
         train_dataset: set of training data
         (x0, y0): original image
     """
+    print(x0.type())
 
     if (model.predict(x0) != y0):
         print("Fail to classify the image. No need to attack.")
@@ -202,7 +203,8 @@ def attack_untargeted(model, x0, y0, alpha = 0.2, beta = 0.001, iterations = 100
     
     timestart = time.time()
     for i in range(num_directions):
-        theta = torch.randn(x0.shape()).type(torch.FloatTensor)
+        theta = torch.randn(x0.size()).type(torch.FloatTensor)
+        print(theta.size())
         initial_lbd = torch.norm(theta)
         theta = theta/torch.norm(theta)
         lbd, count = fine_grained_binary_search(model, x0, y0, theta, initial_lbd, g_theta)
@@ -214,6 +216,7 @@ def attack_untargeted(model, x0, y0, alpha = 0.2, beta = 0.001, iterations = 100
     timeend = time.time()
     print("==========> Found best distortion %.4f in %.4f seconds using %d queries" % (g_theta, timeend-timestart, query_count))
 
+    
     
     timestart = time.time()
     g1 = 1.0
@@ -292,7 +295,6 @@ def attack_untargeted(model, x0, y0, alpha = 0.2, beta = 0.001, iterations = 100
     timeend = time.time()
     print("\nAdversarial Example Found Successfully: distortion %.4f target %d queries %d \nTime: %.4f seconds" % (g_theta, target, query_count + opt_count, timeend-timestart))
     return x0 + g_theta*best_theta
-
 def fine_grained_binary_search_local(model, x0, y0, theta, initial_lbd = 1.0, tol=1e-5):
     nquery = 0
     lbd = initial_lbd
