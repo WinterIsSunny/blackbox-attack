@@ -195,7 +195,8 @@ def attack_untargeted(model, x0, y0, alpha = 0.2, beta = 0.001, iterations = 100
     #print(y0.type())
     #print(model.predict(x0).type())
     y0.cuda()
-
+    print(y0.type())
+    
     if (model.predict(x0) != y0):
         print("Fail to classify the image. No need to attack.")
         return x0
