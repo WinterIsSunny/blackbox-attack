@@ -191,7 +191,9 @@ def attack_untargeted(model, x0, y0, alpha = 0.2, beta = 0.001, iterations = 100
         train_dataset: set of training data
         (x0, y0): original image
     """
-    print(x0.type())
+    #print(x0.type())
+    print(y0.type())
+    print(model.predict(x0).type())
 
     if (model.predict(x0) != y0):
         print("Fail to classify the image. No need to attack.")
@@ -204,7 +206,7 @@ def attack_untargeted(model, x0, y0, alpha = 0.2, beta = 0.001, iterations = 100
     timestart = time.time()
     for i in range(num_directions):
         theta = torch.randn(x0.size()).type(torch.FloatTensor)
-        print(theta.size())
+        #print(theta.size())
         initial_lbd = torch.norm(theta)
         theta = theta/torch.norm(theta)
         lbd, count = fine_grained_binary_search(model, x0, y0, theta, initial_lbd, g_theta)
