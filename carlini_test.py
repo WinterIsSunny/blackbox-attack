@@ -16,7 +16,7 @@ Created on Tue Jul 24 10:40:12 2018
 import torch
 from torch.autograd import Variable
 import torch.optim as optim
-#from utils import mulvt
+from utils import mulvt
 
 import time
 import random 
